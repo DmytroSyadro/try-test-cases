@@ -2,6 +2,9 @@ package com.softserve.edu.teachua.pages.user;
 
 import com.softserve.edu.teachua.pages.menu.HomePage;
 import com.softserve.edu.teachua.pages.top.TopPart;
+import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchExplicitPresent;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +17,7 @@ import java.util.List;
 public class LoginModal {
     public static final String POPUP_MESSAGE_UNSUCCESSFULLY = "Введено невірний пароль або email";
 
-    private WebDriver driver;
+    protected Search search;
     //
     private WebElement emailInput;
     //private WebElement emailFeedbackIcon; // TODO
@@ -22,15 +25,15 @@ public class LoginModal {
     //private WebElement passwordFeedbackIcon; // TODO
     private WebElement signInButton;
 
-    public LoginModal(WebDriver driver) {
-        this.driver = driver;
+    public LoginModal() {
+        search = SearchStrategy.getSearch();
         initElements();
     }
 
     private void initElements() {
-        emailInput = driver.findElement(By.id("basic_email"));
-        passwordInput = driver.findElement(By.id("basic_password"));
-        signInButton = driver.findElement(By.cssSelector("div.login-footer button"));
+        emailInput = search.id("basic_email");
+        passwordInput = search.id("basic_password");
+        signInButton = search.cssSelector("div.login-footer button");
     }
 
     // Page Object
@@ -118,7 +121,7 @@ public class LoginModal {
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(
+        /*new WebDriverWait(driver, Duration.ofSeconds(10)).until(
                 new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
                         WebElement popup = driver.findElement(By.cssSelector(TopPart.POPUP_MESSAGE_CSSSELECTOR));
@@ -126,9 +129,10 @@ public class LoginModal {
                         return !popup.getText().isEmpty();
                     }
                 }
-        );
+        );*/
         //
-        List<WebElement> popupMessageLabel = driver.findElements(By.cssSelector(TopPart.POPUP_MESSAGE_CSSSELECTOR));
+
+        List<WebElement> popupMessageLabel = search.cssSelectors(TopPart.POPUP_MESSAGE_CSSSELECTOR);
         System.out.println("\tpopupMessageLabel.size() = " + popupMessageLabel.size());
         System.out.println("\tpopupMessageLabel.get(0).getText() = " + popupMessageLabel.get(0).getText());
         if (popupMessageLabel.size() == 0) {
@@ -150,6 +154,6 @@ public class LoginModal {
     public LoginModal unsuccessfulLoginPage(String email, String password) {
         //fillLogin(invalidUser);
         fillLogin(email, password);
-        return new LoginModal(driver);
+        return new LoginModal();
     }
 }

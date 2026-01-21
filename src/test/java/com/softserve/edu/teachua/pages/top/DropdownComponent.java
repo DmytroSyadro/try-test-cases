@@ -3,6 +3,8 @@ package com.softserve.edu.teachua.pages.top;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,16 +14,17 @@ public class DropdownComponent {
     protected final String OPTIONNAME_NOT_FOUND = "OptionName not Found.";
     //
     protected WebDriver driver;
-    //
+
+    protected Search search;
     private List<WebElement> listOptions;
 
-    public DropdownComponent(WebDriver driver, By searchLocator) {
-        this.driver = driver;
+    public DropdownComponent(By searchLocator) {
+        search = SearchStrategy.getSearch();
         initElements(searchLocator);
     }
 
     private void initElements(By searchLocator) {
-        listOptions = driver.findElements(searchLocator);
+        listOptions = search.we(searchLocator);
     }
 
     // Page Object

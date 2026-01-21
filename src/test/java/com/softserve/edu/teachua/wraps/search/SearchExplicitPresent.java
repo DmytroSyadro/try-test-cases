@@ -1,6 +1,7 @@
 package com.softserve.edu.teachua.wraps.search;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,26 +12,33 @@ public class SearchExplicitPresent extends SearchExplicit {
 
     @Override
     public WebElement getWebElement(By by) {
-        // TODO
-        return null;
+        return getDriverWait().until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     @Override
     public WebElement getWebElement(By by, WebElement fromWebElement) {
-        // TODO
-        return null;
+        return getDriverWait().until(ExpectedConditions.presenceOfNestedElementLocatedBy(fromWebElement, by));
     }
 
     @Override
     public List<WebElement> getWebElements(By by) {
-        // TODO
-        return null;
+        return getDriverWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
     }
 
     @Override
     public List<WebElement> getWebElements(By by, WebElement fromWebElement) {
-        // TODO
-        return null;
+        return getDriverWait().until(new ExpectedCondition<List<WebElement>>() {
+            @Override
+            public List<WebElement> apply(WebDriver driver) {
+                List<WebElement> allChildren = fromWebElement.findElements(by);
+                if (allChildren.isEmpty()){
+                    return null;
+                }
+                else{
+                    return allChildren;
+                }
+            }
+        });
     }
 
 }

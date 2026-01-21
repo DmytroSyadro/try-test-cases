@@ -50,6 +50,27 @@ public abstract class Search {
         }
     }
 
+    public List<WebElement> webElements(By by){
+        return searchWebElements(by);
+    }
+    public boolean isLocated(By by){
+        return searchWebElements(by).size() > 0;
+    }
+    public boolean isLocatedCss(String cssSelector){
+        return cssSelectors(cssSelector).size()>0;
+    }
+    public boolean isLocated(By by, String text){
+       List<WebElement> elements = searchWebElements(by);
+       return (elements.size()>0)&&(elements.get(0).getText().contains(text));
+    }
+    public boolean isLocatedCss(String cssSelector, String text){
+        List<WebElement> elements = cssSelectors(cssSelector);
+        return (elements.size()>0)&&(elements.get(0).getText().contains(text));
+    }
+    public boolean isInvisibleCss(String cssSelector, String text){
+        return !isLocatedCss(cssSelector,text);
+    }
+
     // Search Element
 
     public WebElement id(String id) {

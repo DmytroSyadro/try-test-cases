@@ -1,5 +1,6 @@
 package com.softserve.edu.teachua.pages.club;
 
+import com.softserve.edu.teachua.wraps.search.Search;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,22 +12,23 @@ import java.time.Duration;
 
 public class ClubCommentModal {
 
-    private WebDriver driver;
+    protected Search search;
 
     private WebElement rateStar5Link;
     private WebElement typeCommentArea;
     private WebElement sendCommentButton;
 
-    public ClubCommentModal(WebDriver driver) {
-        this.driver = driver;
+    public ClubCommentModal() {
+
         initElements();
     }
 
     private void initElements() {
         // init elements
-        rateStar5Link = driver.findElement(By.cssSelector("div.ant-form-item div[aria-posinset='5']"));
-        typeCommentArea = driver.findElement(By.id("comment-edit_commentText"));
-        sendCommentButton = driver.findElement(By.cssSelector("button.do-comment-button"));
+        assert search != null;
+        rateStar5Link = search.cssSelector("div.ant-form-item div[aria-posinset='5']");
+        typeCommentArea = search.id("comment-edit_commentText");
+        sendCommentButton = search.cssSelector("button.do-comment-button");
     }
 
     // Page Object
@@ -99,6 +101,6 @@ public class ClubCommentModal {
 
     public ClubDetailsPage submitComment(String commentText) {
         acceptComment(commentText);
-        return new ClubDetailsPage(driver);
+        return new ClubDetailsPage();
     }
 }

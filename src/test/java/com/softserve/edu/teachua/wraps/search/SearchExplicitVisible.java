@@ -11,26 +11,22 @@ public class SearchExplicitVisible extends SearchExplicit {
 
     @Override
     public WebElement getWebElement(By by) {
-        // TODO
-        return null;
+        return getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     @Override
     public WebElement getWebElement(By by, WebElement fromWebElement) {
-        // TODO
-        return null;
+        return getDriverWait().until(ExpectedConditions.presenceOfNestedElementLocatedBy(fromWebElement, by));
     }
 
     @Override
     public List<WebElement> getWebElements(By by) {
-        // TODO
-        return null;
+        return getDriverWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
     }
 
     @Override
     public List<WebElement> getWebElements(By by, WebElement fromWebElement) {
-        // TODO
-        return null;
+        return getDriverWait().until(ExpectedConditions.visibilityOfNestedElementsLocatedBy(fromWebElement, by));
     }
 
 }

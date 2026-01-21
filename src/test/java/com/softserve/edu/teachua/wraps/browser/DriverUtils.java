@@ -16,10 +16,7 @@ import java.util.Map;
 
 import com.softserve.edu.teachua.tools.PropertiesUtils;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 public final class DriverUtils {
     private static final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss-S";
@@ -82,7 +79,12 @@ public final class DriverUtils {
     public static void setImplicitWait(long waitSeconds) {
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(waitSeconds));
     }
-
+    public static void switchToFrame(WebElement element){
+        getDriver().switchTo().frame(element);
+    }
+    public static void switchToDefault(WebElement element){
+        getDriver().switchTo().defaultContent();
+    }
     public static void clearImplicitWait() {
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(0L));
     }

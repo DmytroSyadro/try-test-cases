@@ -15,14 +15,13 @@ public class ClubDetailsPage extends TopPart {
     //private WebElement datetimeLabel;
     //private WebElement commentContentLabel;
 
-    public ClubDetailsPage(WebDriver driver) {
-        super(driver);
+    public ClubDetailsPage() {
         initElements();
     }
 
     private void initElements() {
         // init elements
-        commentsContainer = new CommentsContainer(driver);
+        commentsContainer = new CommentsContainer();
         createCommentButton = driver.findElement(By.cssSelector("button.comment-button"));
         //
         //authorContentLabel = driver.findElement(By.cssSelector("div.ant-spin-container li:first-child div.author-content > span.name"));
