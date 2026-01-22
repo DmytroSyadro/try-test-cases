@@ -350,8 +350,9 @@ public abstract class TopPart {
 //        }
         //
         //
-        search = SearchStrategy.setExplicitPresentStrategy();
-
+        search = SearchStrategy.setExplicitPresentTextCssStrategy();
+        search.isLocatedCss(TopPart.POPUP_MESSAGE_CSSSELECTOR);
+        search = SearchStrategy.restoreStrategy();
         List<WebElement> popupMessageLabel = search.cssSelectors(POPUP_MESSAGE_CSSSELECTOR);
         System.out.println("\tpopupMessageLabel.size() = " + popupMessageLabel.size());
         System.out.println("\tpopupMessageLabel.get(0).getText() = " + popupMessageLabel.get(0).getText());

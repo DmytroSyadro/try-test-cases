@@ -32,11 +32,9 @@ public class ClubsContainer {
     }
 
     private void initElements() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        search = SearchStrategy.setImplicitStrategy();
+
+        search = SearchStrategy.restoreStrategy();
         // init elements
         clubComponents = new ArrayList<>();
         for (WebElement current : search.cssSelectors(CLUBS_COMPONENT_CSSSELECTOR)) {
