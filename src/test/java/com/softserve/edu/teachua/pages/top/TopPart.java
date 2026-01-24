@@ -202,7 +202,7 @@ public abstract class TopPart {
     private DropdownComponent createDropdownComponent(By searchLocator) {
         search = SearchStrategy.setExplicitPresentFirstText();
         search.isLocated(searchLocator);
-        search = SearchStrategy.setDefaultStrategy();
+        search = SearchStrategy.restoreStrategy();
         dropdownComponent = new DropdownComponent(searchLocator);
         //dropdownComponent = new DropdownComponent(searchLocator);
         return getDropdownComponent();

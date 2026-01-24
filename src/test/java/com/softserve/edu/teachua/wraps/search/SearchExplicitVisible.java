@@ -16,7 +16,7 @@ public class SearchExplicitVisible extends SearchExplicit {
 
     @Override
     public WebElement getWebElement(By by, WebElement fromWebElement) {
-        return getDriverWait().until(ExpectedConditions.presenceOfNestedElementLocatedBy(fromWebElement, by));
+        return getWebElements(by, fromWebElement).get(0);
     }
 
     @Override

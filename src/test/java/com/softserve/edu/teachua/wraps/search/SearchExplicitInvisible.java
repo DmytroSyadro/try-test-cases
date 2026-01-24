@@ -20,7 +20,8 @@ public class SearchExplicitInvisible extends SearchExplicitPresent{
             @Override
             public Boolean apply(WebDriver driver) {
                 List<WebElement> elements = driver.findElements(By.cssSelector(cssSelector));
-                return !elements.get(0).getText().contains(text)||(amount++>0);            }
+                return !elements.get(0).getText().contains(text)||(amount++>0);
+            }
         });
     }
 }

@@ -11,6 +11,7 @@ public class SearchExplicitTextCss extends SearchExplicitPresent {
     @Override
      public boolean isLocatedCss(String cssSelector){
          return getDriverWait().until(new ExpectedCondition<Boolean>() {
+             @Override
              public Boolean apply(WebDriver driver) {
                  WebElement element = cssSelector(cssSelector);
                  return !element.getText().isEmpty();

@@ -40,6 +40,7 @@ public class ClubsContainer {
             search = SearchStrategy.setExplicitInvisible();
             search.isInvisibleCss("div.ant-card.ant-card-bordered div.name", firstText);
         }
+        search = SearchStrategy.restoreStrategy();
         clubComponents = new ArrayList<>();
         for (WebElement current : search.cssSelectors(CLUBS_COMPONENT_CSSSELECTOR)) {
             clubComponents.add(new ClubComponent(current));
