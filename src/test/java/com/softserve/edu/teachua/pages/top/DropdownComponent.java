@@ -24,7 +24,10 @@ public class DropdownComponent {
     }
 
     private void initElements(By searchLocator) {
-        listOptions = search.we(searchLocator);
+        search = SearchStrategy.setExplicitPresentFirstText();
+        search.isLocated(searchLocator);
+        search = SearchStrategy.restoreStrategy();
+        listOptions = search.webElements(searchLocator);
     }
 
     // Page Object

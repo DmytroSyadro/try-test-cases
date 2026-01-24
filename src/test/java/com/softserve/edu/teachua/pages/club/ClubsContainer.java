@@ -29,13 +29,17 @@ public class ClubsContainer {
     public ClubsContainer(){
         search = SearchStrategy.getSearch();
         initElements();
+
     }
 
     private void initElements() {
         search = SearchStrategy.setImplicitStrategy();
-
-        search = SearchStrategy.restoreStrategy();
-        // init elements
+        if(search.isLocatedCss(CLUBS_COMPONENT_CSSSELECTOR)){
+            String firstText = search.cssSelectors("div.ant-card.ant-card-bordered div.name").get(0).getText();
+            search = SearchStrategy.restoreStrategy();
+            search = SearchStrategy.setExplicitInvisible();
+            search.isInvisibleCss("div.ant-card.ant-card-bordered div.name", firstText);
+        }
         clubComponents = new ArrayList<>();
         for (WebElement current : search.cssSelectors(CLUBS_COMPONENT_CSSSELECTOR)) {
             clubComponents.add(new ClubComponent(current));

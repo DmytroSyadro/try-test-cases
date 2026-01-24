@@ -22,7 +22,7 @@ public class ClubDetailsPage extends TopPart {
     private void initElements() {
         // init elements
         commentsContainer = new CommentsContainer();
-        createCommentButton = driver.findElement(By.cssSelector("button.comment-button"));
+        createCommentButton = search.cssSelector("button.comment-button");
         //
         //authorContentLabel = driver.findElement(By.cssSelector("div.ant-spin-container li:first-child div.author-content > span.name"));
         //datetimeLabel = driver.findElement(By.cssSelector("div.ant-spin-container li:first-child div.author-content > span.datetime"));
@@ -55,7 +55,7 @@ public class ClubDetailsPage extends TopPart {
 
     public ClubCommentModal openClubCommentModal() {
         clickCreateCommentButton();
-        return new ClubCommentModal(driver);
+        return new ClubCommentModal();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.softserve.edu.teachua.pages.top;
 
-import com.softserve.edu.teachua.data.Challengies;
+import com.softserve.edu.teachua.data.Challenges;
 import com.softserve.edu.teachua.data.Cities;
 import com.softserve.edu.teachua.pages.challenge.ChallengeTeachPage;
 import com.softserve.edu.teachua.pages.menu.HomePage;
@@ -14,11 +14,8 @@ import com.softserve.edu.teachua.pages.user.LoginModal;
 import com.softserve.edu.teachua.wraps.search.Search;
 import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Constructor;
-import java.time.Duration;
 import java.util.List;
 
 import static org.openqa.selenium.By.cssSelector;
@@ -70,7 +67,7 @@ public abstract class TopPart {
         newsLink = search.cssSelector("span.ant-menu-title-content > a[href*='/news']");
         aboutUsLink = search.cssSelector("span.ant-menu-title-content > a[href*='/about']");
         ukrainianServiceLink = search.cssSelector("span.ant-menu-title-content > a[href*='/service']");
-        cityDropdownLink = search.cssSelector("div.city span.anticon-caret-down");
+        cityDropdownLink = search.cssSelector(".ant-dropdown-trigger.city");
         caretDropdownLink = search.cssSelector("div.user-profile span.anticon.anticon-caret-down");
         qubStudioLabel = search.cssSelector("div.qubstudio");
         userProfilePic = search.cssSelector("div.user-profile span.ant-avatar");
@@ -203,11 +200,9 @@ public abstract class TopPart {
     }
 
     private DropdownComponent createDropdownComponent(By searchLocator) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        search = SearchStrategy.setExplicitPresentFirstText();
+        search.isLocated(searchLocator);
+        search = SearchStrategy.setDefaultStrategy();
         dropdownComponent = new DropdownComponent(searchLocator);
         //dropdownComponent = new DropdownComponent(searchLocator);
         return getDropdownComponent();
@@ -343,13 +338,6 @@ public abstract class TopPart {
 
     // popupMessageLabel
     public String getPopupMessageLabelText() {
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-        //
-        //
         search = SearchStrategy.setExplicitPresentTextCssStrategy();
         search.isLocatedCss(TopPart.POPUP_MESSAGE_CSSSELECTOR);
         search = SearchStrategy.restoreStrategy();
@@ -396,7 +384,7 @@ public abstract class TopPart {
         return chooseChallenge(challengeName, clazz);
     }
 
-    public <T> T gotoChallengePage(Challengies challengeName, Class<T> clazz) {
+    public <T> T gotoChallengePage(Challenges challengeName, Class<T> clazz) {
         return chooseChallenge(challengeName.getName(), clazz);
     }
 

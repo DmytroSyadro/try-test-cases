@@ -29,10 +29,10 @@ public class ClubComponent {
     private void initElements() {
         // init elements
         titleLink = search.cssSelector("div.title", clubCard);
-        categoriesLabel = search.cssSelectors("div.tags.club-tags span.name");
-        descriptionLabel = search.cssSelector("p.description");
-        addressLabel = search.cssSelector("div.address");
-        detailsButton = search.cssSelector("a.details-button > a");
+        categoriesLabel = search.cssSelectors("div.tags.club-tags span.name", clubCard);
+        descriptionLabel = search.cssSelector("p.description", clubCard);
+        addressLabel = search.cssSelector("div.address", clubCard);
+        detailsButton = search.cssSelector("a.details-button > a", clubCard);
     }
 
     // Page Object

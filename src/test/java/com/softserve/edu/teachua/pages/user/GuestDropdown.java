@@ -19,12 +19,9 @@ public class GuestDropdown {
     }
 
     private void initElements() {
-        // TODO AJAX element. Update next
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        search = SearchStrategy.setExplicitPresentTextCssStrategy();
+        search.isLocatedCss("li[data-menu-id*='login'] span.ant-dropdown-menu-title-content");
+        search = SearchStrategy.restoreStrategy();
         // init elements
         register = search.cssSelector("li[data-menu-id*='register'] span.ant-dropdown-menu-title-content");
         login = search.cssSelector("li[data-menu-id*='login'] span.ant-dropdown-menu-title-content");

@@ -57,7 +57,13 @@ public final class SearchStrategy {
         return setStrategy(Strategies.EXPLICIT_VISIBLE_STRATEGY);
     }
     public static Search setExplicitPresentTextCssStrategy(){
-        return setStrategy(Strategies.EXPLICIT_PRESENT_STRATEGY);
+        return setStrategy(Strategies.EXPLICIT_TEXT_STRATEGY);
+    }
+    public static Search setExplicitPresentFirstText(){
+        return setStrategy(Strategies.EXPLICIT_FIRST_TEXT_STRATEGY);
+    }
+    public static Search setExplicitInvisible(){
+        return setStrategy(Strategies.EXPLICIT_INVISIBLE_STRATEGY);
     }
 
     public static Search restoreStrategy(){

@@ -25,12 +25,36 @@ class ExplicitStrategyVisible implements Strategy {
         return new SearchExplicitVisible();
     }
 }
+class ExplicitStrategyFirstText implements Strategy{
+    public Search getStrategy(){
+        return new SearchExplicitPresentFirstText();
+    }
+}
+class ExplicitStrategyTextCss implements Strategy{
+    public Search getStrategy(){
+        return new SearchExplicitTextCss();
+    }
+}
+class ExplicitStrategyInvisibleElement implements Strategy{
+    public Search getStrategy(){
+        return new SearchExplicitInvisible();
+    }
+}
+
+
 
 public enum Strategies {
     DEFAULT_STRATEGY(new ImplicitStrategy()),
     IMPLICIT_STRATEGY(new ImplicitStrategy()),
     EXPLICIT_PRESENT_STRATEGY(new ExplicitStrategyPresent()),
-    EXPLICIT_VISIBLE_STRATEGY(new ExplicitStrategyVisible());
+    EXPLICIT_VISIBLE_STRATEGY(new ExplicitStrategyVisible()),
+    EXPLICIT_FIRST_TEXT_STRATEGY(new ExplicitStrategyFirstText()),
+    EXPLICIT_TEXT_STRATEGY(new ExplicitStrategyTextCss()),
+    EXPLICIT_INVISIBLE_STRATEGY(new ExplicitStrategyInvisibleElement());
+
+
+
+
 
     private Strategy strategy;
 

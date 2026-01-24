@@ -1,6 +1,8 @@
 package com.softserve.edu.teachua.pages.club;
 
 import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchExplicit;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -89,11 +91,10 @@ public class ClubCommentModal {
         enterCommentArea(commentText);
         clickSendCommentButton();
         //
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        search = SearchStrategy.setExplicitPresentFirstText();
+        search.isLocatedCss(".ant-comment.root-comment .ant-comment-inner");
+        search = SearchStrategy.restoreStrategy();
+
         //
     }
 

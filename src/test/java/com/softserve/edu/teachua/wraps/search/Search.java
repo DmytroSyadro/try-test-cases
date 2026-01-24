@@ -3,6 +3,7 @@ package com.softserve.edu.teachua.wraps.search;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 public abstract class Search {
@@ -69,6 +70,13 @@ public abstract class Search {
     }
     public boolean isInvisibleCss(String cssSelector, String text){
         return !isLocatedCss(cssSelector,text);
+    }
+    public boolean isInvisible(WebElement element){
+        try {
+            return !element.isDisplayed();
+        }catch (StaleElementReferenceException e){
+            return true;
+        }
     }
 
     // Search Element

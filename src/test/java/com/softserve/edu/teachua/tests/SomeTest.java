@@ -6,7 +6,6 @@ import com.softserve.edu.teachua.pages.challenge.YoutubeFrame;
 import com.softserve.edu.teachua.pages.club.AdvancedClubPage;
 import com.softserve.edu.teachua.pages.club.ClubComponent;
 import com.softserve.edu.teachua.pages.club.ClubDetailsPage;
-import com.softserve.edu.teachua.pages.club.ClubNotFoundPage;
 import com.softserve.edu.teachua.pages.menu.HomePage;
 import com.softserve.edu.teachua.pages.top.TopPart;
 import com.softserve.edu.teachua.pages.user.LoginModal;
@@ -16,7 +15,6 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -92,13 +90,13 @@ public class SomeTest extends TestRunner {
 
     private static Stream<Arguments> challengeTeachProvider() {
         return Stream.of(
-                Arguments.of(Challengies.TO_LEARN_CHALLENGE, UrlContents.WEBINAR_IFRAME)
+                Arguments.of(Challenges.TO_LEARN_CHALLENGE, UrlContents.WEBINAR_IFRAME)
         );
     }
 
     @ParameterizedTest(name = "{index} => challengeName={0}")
     @MethodSource("challengeTeachProvider")
-    public void checkChallenge(Challengies challengeName, UrlContents urlContents) {
+    public void checkChallenge(Challenges challengeName, UrlContents urlContents) {
         YoutubeFrame youtubeFrame = loadApplication()
                 .gotoChallengePage(challengeName, ChallengeTeachPage.class)
                 .gotoYoutubeFrame()
@@ -140,52 +138,51 @@ public class SomeTest extends TestRunner {
 
     private static Stream<Arguments> clubProvider() {
         return Stream.of(
-                Arguments.of(ClubContents.NEW_CADRE_CLUB),
-                Arguments.of(ClubContents.VECTOR_CLUB)
+                Arguments.of(ClubRepository.get().IT_Education())
         );
     }
 
     @ParameterizedTest(name = "{index} => clubContents={0}")
     @MethodSource("clubProvider")
-    public void checkClubExist(ClubContents clubContents) {
+    public void checkClubExist(IClub club) {
         ClubComponent ClubComponent = loadApplication()
                 .gotoClubPage()
-                .chooseCity(clubContents.getCity())
+                .chooseCity(club.getCities())
                 .getClubContainer()
-                .getClubComponentByPartialTitle(clubContents.getTitle());
+                .getClubComponentByPartialTitle(club.getName());
         //
         // Check club titles and descriptions
-        Assertions.assertTrue(ClubComponent.getTitleLinkText().contains(clubContents.getTitle()));
+        Assertions.assertTrue(ClubComponent.getTitleLinkText().contains(club.getName()));
         presentationSleep();
     }
 
     @ParameterizedTest(name = "{index} => clubContents={0}")
     @MethodSource("clubProvider")
-    public void checkAdvancedSearch(ClubContents clubContents) {
+    public void checkAdvancedSearch(IClub club) {
         AdvancedClubPage advancedClubPage = loadApplication()
                 .gotoClubPage()
-                .chooseCity(clubContents.getCity())
+                .chooseCity(club.getCities())
                 .gotoAdvancedClubPage();
         //
         // Use pagination to search club
-        Assertions.assertTrue(advancedClubPage.isExistClubByPartialTitle(clubContents.getTitle()));
+        Assertions.assertTrue(advancedClubPage.isExistClubByPartialTitle(club.getName()));
         presentationSleep();
     }
 
     private static Stream<Arguments> commentProvider() {
         return Stream.of(
-                Arguments.of(ClubContents.IT_EDUCATION_CLUB, CommentContents.FIRST_COMMENT)
+                Arguments.of(ClubRepository.get().IT_Education(), CommentContents.FIRST_COMMENT)
         );
     }
 
     @ParameterizedTest(name = "{index} => clubContents={0}, commentContents={0}")
     @MethodSource("commentProvider")
-    public void checkCommentExist(ClubContents clubContents, CommentContents commentContents) {
+    public void checkCommentExist(IClub club, CommentContents commentContents) {
         ClubDetailsPage clubDetailsPage = loadApplication()
                 .gotoClubPage()
-                .chooseCity(clubContents.getCity())
+                .chooseCity(club.getCities())
                 .getClubContainer()
-                .getClubComponentByPartialTitle(clubContents.getTitle())
+                .getClubComponentByPartialTitle(club.getName())
                 .openClubDetailsPage();
         //
         // Check comment exist

@@ -2,6 +2,7 @@ package com.softserve.edu.teachua.pages.club;
 
 import com.softserve.edu.teachua.data.Cities;
 import com.softserve.edu.teachua.pages.top.TopSearchPart;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,7 @@ public class ClubPage extends TopSearchPart {
 
     private void initElements() {
         // init elements
+        search = SearchStrategy.restoreStrategy();
         clubsContainer = new ClubsContainer();
     }
 

@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.softserve.edu.teachua.tools.PropertiesUtils;
+import net.bytebuddy.asm.Advice;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 
@@ -22,6 +23,7 @@ public final class DriverUtils {
     private static final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss-S";
     private static final String LOCALSTORAGE_REMOVE_ITEM = "window.localStorage.removeItem('%s');";
     //
+    private static volatile DriverUtils instance = null;
     private static Map<Long, WebDriver> drivers = new HashMap<>();
     private static Browsers defaultBrowser;
 
