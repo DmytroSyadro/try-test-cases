@@ -39,6 +39,7 @@ public class WorkTime implements IStartHour,IStartMinute, IEndHour, IEndMinute, 
     public String getStartHour() {
         return startHour;
     }
+
     @Override
     public IStartMinute setStartHour(String startHour) {
         this.startHour = startHour;
@@ -48,6 +49,7 @@ public class WorkTime implements IStartHour,IStartMinute, IEndHour, IEndMinute, 
     public String getStartMinute() {
         return startMinute;
     }
+
     @Override
     public IEndHour setStartMinute(String startMinute) {
         this.startMinute = startMinute;

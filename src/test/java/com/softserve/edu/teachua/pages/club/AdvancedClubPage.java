@@ -17,7 +17,6 @@ public class AdvancedClubPage extends ClubPage {
         advancedSearchLabel = search.cssSelector("div.ant-layout-sider-children > div.club-list-label");
     }
 
-    // Page Object
 
     // advancedSearchLabel
     public WebElement getAdvancedSearchLabel() {
@@ -28,9 +27,6 @@ public class AdvancedClubPage extends ClubPage {
         return getAdvancedSearchLabel().getText();
     }
 
-    // Functional
-
-    // Business Logic
 
     @Override
     public AdvancedClubPage previousClubPagination() {

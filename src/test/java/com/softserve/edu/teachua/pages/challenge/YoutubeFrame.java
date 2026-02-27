@@ -25,7 +25,7 @@ public class YoutubeFrame {
     private void initElements() {
         videoPlayerLink = search.cssSelector("div.html5-video-player");
         videoPlayButton = search.cssSelector("button[aria-label='Play']");
-        youtubeLink = search.cssSelector("a[title='Watch on YouTube']");
+        youtubeLink = search.cssSelector("a[aria-label='Watch on YouTube']");
     }
 
     // Page Object
